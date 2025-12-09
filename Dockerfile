@@ -23,18 +23,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Next.js collects completely anonymous telemetry data about general usage.
-
-ARG NEXT_PUBLIC_SERVER_BASE_URL
-ENV NEXT_PUBLIC_SERVER_BASE_URL=$NEXT_PUBLIC_SERVER_BASE_URL
-
-ARG NEXT_PUBLIC_NEXTAUTH_SECRET
-ENV NEXT_PUBLIC_NEXTAUTH_SECRET=$NEXT_PUBLIC_NEXTAUTH_SECRET
-
-ARG NEXT_PUBLIC_NEXTAUTH_URL
-ENV NEXT_PUBLIC_NEXTAUTH_URL=$NEXT_PUBLIC_NEXTAUTH_URL
-
-
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
   elif [ -f package-lock.json ]; then npm run build; \
